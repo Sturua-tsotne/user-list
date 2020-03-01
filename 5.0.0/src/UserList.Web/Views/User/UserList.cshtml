@@ -1,0 +1,93 @@
+﻿@model IEnumerable<UserList.Models.UserLIstModel>
+
+@{
+    ViewData["Title"] = "UserList";
+}
+
+<div style="color:red;" class="col-md-offset-2 col-md-10 ">
+    @Html.Raw(ViewBag.HtmlOutput)
+</div>
+
+<p>
+    <a asp-action="Index">Create New</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr class="row">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.personalnumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationaly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.PayrollCurrency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="row">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.personalnumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nationaly)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayrollCurrency)
+                </td>
+
+                <td>
+                    @foreach (var pho in item.Phone)
+                    {
+                        <br/>
+                        @Html.DisplayFor(modelItem => pho)
+                    }
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("რედაქტირება", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("წაშლა", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,285 @@
+﻿@model UserList.Models.UserLIstModel
+
+
+
+
+<div id="form " class="container">
+    <div class="form-group">
+        <input class="form-control" type="hidden" id="id" name="id" value="@Model.Id" />
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <label for="country">სახელი</label>
+        </div>
+        <div class="form-group col-sm-10">
+            <input class="form-control" type="text" id="name" name="name" placeholder="სახელი" value="@Model.Name" />
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-2">
+            <label for="country">გვარი</label>
+        </div>
+        <div class="form-group col-sm-10">
+            <input class="form-control" type="text" id="surname" name="surname" placeholder="გვარი" value="@Model.Surname" />
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="country">პირადი ნომერი</label>
+        </div>
+        <div class="form-group col-sm-8">
+            <input class="form-control" type="text" id="personalnumber" name="personalnumber" placeholder="პირადი ნომერი" value="@Model.personalnumber" />
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="country">დაბადების თარიღი </label>
+        </div>
+        <div class="form-group col-lg-8">
+            @*<input disabled type="date" asp-for="DateOfBirth" id="dpDateNow" class="form-control" />*@
+
+
+            <input class="form-control" type="text" id="dateofbirth" name="dateofbirth " placeholder="დაბადების თარიღი " value="@Model.DateOfBirth" />
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="country">მდებარეობა </label>
+        </div>
+        <div class="form-group col-lg-8">
+            <select id="nationaly">
+                <option style="margin-left:5px" value="@Model.Nationaly"> @Model.Nationaly</option>
+                <option value="საქართველო">საქართველო</option>
+                <option value="რუსეთი">რუსეთი</option>
+                <option value="ამერიკა">ამერიკა</option>
+            </select>
+        </div>
+
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-2">
+            <label for="country">ხელფასი</label>
+        </div>
+        <div class="form-group col-sm-3">
+            <input class="form-control" type="number" id="salary" name="salary" placeholder="ხელფასი" value="@Model.Salary" />
+        </div>
+
+
+        <div class="col-sm-3">
+            <label for="country">ხელფასის ვალუტა</label>
+        </div>
+        <div class="form-group col-sm-4">
+            <input class="form-control" type="text" id="payrollCurrency" name="payrollCurrency" placeholder="ხელფასის ვალუტა " value="@Model.PayrollCurrency" />
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3">
+            <label for="country">მობილური ტელ. ნომერი </label>
+        </div>
+        @foreach (var item in Model.Phone)
+        {
+
+            <div class="form-group">
+                <input class="form-control" type="number" id="phone" name="phone" value="@item" />
+
+            </div>
+            <div class="form-group">
+                <ol id="addphon">
+                </ol>
+            </div>
+        }
+
+
+        <div class="col-sm-3">
+            <button class="btn btn-info" id="btn2"> ნომერის დამატება</button>
+        </div>
+
+    </div>
+
+
+    <div>
+        <p id="error" class="errornone">
+
+        </p>
+    </div>
+
+
+</div>
+<hr />
+<div class="form-group">
+    <button id="btn" class=" btn btn-success">რეგისტრაცია</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+<style>
+    .errornone {
+        display: none
+    }
+
+    #btn {
+        margin-top: 30px;
+    }
+
+    .danger {
+        background-color: #ff000066;
+    }
+
+    .success {
+        border-bottom-color: green;
+    }
+
+    .span-active {
+        display: inline-block;
+        border: 1px solid red;
+        padding: 3px;
+        width: 24.5%;
+        margin: 0px 0 3px 0;
+    }
+
+    #form {
+        text-align: center
+    }
+</style>
+
+
+<script>
+
+
+
+    $(document).ready(function () {
+       
+
+    $("#btn2").click(function () {
+
+
+        $("#addphon").prepend("<li> <input type='number' id='phone' name='phone' /></li> ");
+
+        //$("#addphon input").addClass("form-control");
+
+        //$('#addphon input').prop('id', 'phone');
+
+    });
+    });
+
+
+
+    $('#btn').click(function () {
+        $(document).ready(function () {
+            var id = $('#id').val();
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var personalnumber = $('#personalnumber').val();
+            var dateofbirth = $('#dateofbirth').val();
+            var nationaly = $('#nationaly').val();
+            var salary = $('#salary').val();
+            var payrollCurrency = $('#payrollCurrency').val();
+
+
+
+            var phone = new Array();
+            $('input[Id=phone]').each(function () {
+                phone.push($(this).val());
+                console.log(phone);
+            })
+
+
+
+
+            if (name == "") {
+                $('#name').addClass('danger');
+            }
+            else {
+                $('#name').remove('danger');
+                $('#name').addClass('success');
+            }
+            if (surname == "") {
+                $('#surname').addClass('danger');
+            }
+            else {
+                $('#surname').remove('danger');
+                $('#surname').addClass('success');
+            }
+
+            if (personalnumber == "") {
+                $('#personalnumber').addClass('danger');
+            }
+            else {
+                $('#personalnumber').remove('danger');
+                $('#personalnumber').addClass('success');
+            }
+            if (dateofbirth == "") {
+                $('#dateofbirth').addClass('danger');
+            }
+            else {
+                $('#dateofbirth').remove('danger');
+                $('#dateofbirth').addClass('success');
+            }
+            if (nationaly == "") {
+                $('#nationaly').addClass('danger');
+
+            }
+            else {
+                $('#nationaly').remove('danger');
+                $('#nationaly').addClass('success');
+            }
+
+            if (name == "" || surname == "" || personalnumber == "" ||
+                dateofbirth == "" || nationaly == "") {
+                $('#error').remove('errornone')
+                $('#error').addClass('span-active')
+                $('#error').html("გთხოვთ შეავსეთ ყველა მონიშნული ველი !");
+
+            }
+
+            else {
+                $('#error').remove('span-active')
+                $.ajax({
+                    url: '/User/Edit',
+                    type: 'POST',
+                    data: {
+
+                        'id': id, 'name': name, 'surname': surname, 'personalnumber': personalnumber, 'dateofbirth': dateofbirth,
+                        'nationaly': nationaly, 'salary': salary, 'payrollCurrency': payrollCurrency, 'phone': phone,
+                    },
+                    success: function (response) {
+                        if (response == false) {
+                            alert("ტექნიკური ხარვეზია")
+                        }
+                        else {
+                            alert("რედაქტირდა წარმატებით წარმატებიტ");
+                            setTimeout(function () {// wait for 5 secs(2)
+                                location.reload("/Home/Index"); // then reload the page.(3)
+                            }, 100);
+
+                        }
+
+                    }
+
+                })
+
+
+
+            }
+
+
+        })
+    });
+
+
+
+
+</script>
